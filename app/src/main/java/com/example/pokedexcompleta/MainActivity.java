@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity
 
     ArrayList<Pokemon>pokemons = new ArrayList<>();
     ListView    listView ;
-    ArrayList<String>nmb = new ArrayList<>();
+    ArrayList<String>nombres = new ArrayList<>();
    static ArrayList<String>urlsImg = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listadoPoke);
         //------Pre ejecucion------------------//
-        System.out.println("!Hola mundo");
         new Thread(new Runnable()
         {
             @Override
@@ -38,12 +37,13 @@ public class MainActivity extends AppCompatActivity
                 {
                     Document resCompleto = Jsoup.connect("https://www.pokemon.com/es/pokedex/").get();
                     //scraping de una pagina web
-                    nmb = (ArrayList<String>) resCompleto.select("[href^=/es/pokedex/]").eachText();
-                    for (int i = 0 ; i < nmb.size(); i++)
+                    nombres = (ArrayList<String>) resCompleto.select("[href^=/es/pokedex/]").eachText();
+                    nombres.remove(0);
+                    for (int i = 0 ; i < nombres.size(); i++)
                     {
                         String numPokemon = String.format("%03d", i + 1);
                         urlsImg.add("https://assets.pokemon.com/assets/cms2/img/pokedex/full/"+ numPokemon +".png");//conforma la lista de url
-                        pokemons.add(new Pokemon(nmb.get(i)));//Conformar la lista e nombres
+                        pokemons.add(new Pokemon(nombres.get(i)));//Conformar la lista e nombres
                     }
                 }
                 catch (IOException e)
