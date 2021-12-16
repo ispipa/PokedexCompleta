@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listadoPoke);
         //------Pre ejecucion------------------//
+        System.out.println("hola mundooooooooooooooooooo");
         new Thread(new Runnable()
         {
             @Override
